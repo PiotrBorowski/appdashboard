@@ -30,6 +30,10 @@ const AppsContextProvider = ({ children }: { children: ReactNode }) => {
   const [apps, setApps] = useState<AppInfo[]>([]);
   const [selectedAppsIds, setSelectedAppsIds] = useState<number[]>([]);
 
+  // acctually useQuery can be used as a state manager
+  // it can be just like:
+  // const useAllAppsQuery = useQuery("AllApps", fetchAllApps)
+  // and export it in this context
   const { data, isLoading } = useQuery("AllApps", fetchAllApps);
 
   useEffect(() => {

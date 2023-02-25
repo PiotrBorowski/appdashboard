@@ -10,10 +10,10 @@ function AppsList() {
       apps.map((app) => {
         return (
           <AppItemWithDetails
-            watchButtonLabel="WATCH"
             key={app.id}
             data={app}
             onWatchClick={selectApp}
+            watchButtonLabel="WATCH"
           />
         );
       }),
@@ -24,9 +24,7 @@ function AppsList() {
     <table>
       <thead>
         <tr>
-          <th>
-            <b>ALL APPS</b>
-          </th>
+          <th>ALL APPS</th>
         </tr>
         <tr>
           <th>ID</th>

@@ -16,10 +16,10 @@ function WatchedAppsList() {
 
         return (
           <AppItemWithDetails
-            watchButtonLabel={"REMOVE"}
             key={app.id}
             data={app}
             onWatchClick={removeSelectedApp}
+            watchButtonLabel={"REMOVE"}
           />
         );
       }),

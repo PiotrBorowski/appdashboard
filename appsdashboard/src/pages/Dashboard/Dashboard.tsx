@@ -9,7 +9,12 @@ function Dashboard() {
   if (isLoading) return <div>LOADING...</div>;
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-around",
+      }}
+    >
       <AppsList />
       <WatchedAppsList />
     </div>

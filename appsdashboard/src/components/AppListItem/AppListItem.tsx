@@ -22,8 +22,6 @@ function AppListItem({
         {onWatchClick ? (
           <button onClick={_onWatchClick}>{watchButtonLabel}</button>
         ) : null}
-      </td>
-      <td>
         <button onClick={onDetailsClick}>DETAILS</button>
       </td>
     </tr>
