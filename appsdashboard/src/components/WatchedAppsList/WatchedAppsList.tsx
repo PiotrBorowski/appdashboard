@@ -2,31 +2,35 @@ import React, { useMemo } from "react";
 import { useAppsContext } from "../../context/AppsContext/AppsContext";
 import AppItemWithDetails from "../AppItemWithDetails/AppItemWithDetails";
 
-function AppsList() {
-  const { apps, selectApp } = useAppsContext();
+function WatchedAppsList() {
+  const { selectedAppsIds, apps, removeSelectedApp } = useAppsContext();
 
   const items = useMemo(
     () =>
-      apps.map((app) => {
+      selectedAppsIds.map((id) => {
+        const app = apps.find((a) => a.id === id);
+
+        if (!app) {
+          return null;
+        }
+
         return (
           <AppItemWithDetails
-            watchButtonLabel="WATCH"
+            watchButtonLabel={"REMOVE"}
             key={app.id}
             data={app}
-            onWatchClick={selectApp}
+            onWatchClick={removeSelectedApp}
           />
         );
       }),
-    [apps, selectApp]
+    [apps, removeSelectedApp, selectedAppsIds]
   );
 
   return (
     <table>
       <thead>
         <tr>
-          <th>
-            <b>ALL APPS</b>
-          </th>
+          <th>Watched Apps</th>
         </tr>
         <tr>
           <th>ID</th>
@@ -41,4 +45,4 @@ function AppsList() {
   );
 }
 
-export default AppsList;
+export default WatchedAppsList;

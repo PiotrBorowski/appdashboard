@@ -1,5 +1,6 @@
 import React from "react";
 import { AppsList } from "../../components/AppsList";
+import { WatchedAppsList } from "../../components/WatchedAppsList";
 import { useAppsContext } from "../../context/AppsContext/AppsContext";
 
 function Dashboard() {
@@ -10,6 +11,7 @@ function Dashboard() {
   return (
     <div>
       <AppsList />
+      <WatchedAppsList />
     </div>
   );
 }

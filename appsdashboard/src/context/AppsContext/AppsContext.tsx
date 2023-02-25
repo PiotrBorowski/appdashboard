@@ -1,6 +1,7 @@
 import React, {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -11,19 +12,23 @@ import { AppInfo } from "../../types/apps";
 
 type AppsContextValue = {
   apps: AppInfo[];
-  selectedAppsIds: string[];
+  selectedAppsIds: number[];
   isLoading: boolean;
+  selectApp: (id: number) => void;
+  removeSelectedApp: (id: number) => void;
 };
 
 const AppsContext = createContext<AppsContextValue>({
   apps: [],
   selectedAppsIds: [],
   isLoading: true,
+  selectApp: () => null,
+  removeSelectedApp: () => null,
 });
 
 const AppsContextProvider = ({ children }: { children: ReactNode }) => {
   const [apps, setApps] = useState<AppInfo[]>([]);
-  const [selectedAppsIds, setSelectedAppsIds] = useState<string[]>([]);
+  const [selectedAppsIds, setSelectedAppsIds] = useState<number[]>([]);
 
   const { data, isLoading } = useQuery("AllApps", fetchAllApps);
 
@@ -33,10 +38,22 @@ const AppsContextProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [data]);
 
+  const selectApp = useCallback((id: number) => {
+    setSelectedAppsIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  }, []);
+
+  const removeSelectedApp = useCallback((id: number) => {
+    setSelectedAppsIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : prev
+    );
+  }, []);
+
   const contextValue: AppsContextValue = {
     apps,
     selectedAppsIds,
     isLoading,
+    selectApp,
+    removeSelectedApp,
   };
 
   return (
