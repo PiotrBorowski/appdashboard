@@ -1,3 +1,4 @@
+import { Box, Collapse, TableCell, TableRow } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchAppDetails } from "../../services/apps";
@@ -27,15 +28,19 @@ function AppItemWithDetails({ data, onWatchClick, watchButtonLabel }: Props) {
         onWatchClick={onWatchClick}
         onDetailsClick={onDetailsClick}
       />
-      {detailsVisible ? (
-        isLoading || !detailedData ? (
-          <tr>
-            <td>LOADING...</td>
-          </tr>
-        ) : (
-          <AppDetails data={detailedData} />
-        )
-      ) : null}
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
+          <Collapse in={detailsVisible} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              {isLoading || !detailedData ? (
+                <TableCell>LOADING...</TableCell>
+              ) : (
+                <AppDetails data={detailedData} />
+              )}
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
     </>
   );
 }

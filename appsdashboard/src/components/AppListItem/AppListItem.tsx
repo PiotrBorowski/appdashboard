@@ -1,3 +1,4 @@
+import { Button, IconButton, TableCell, TableRow } from "@mui/material";
 import React, { useCallback } from "react";
 import { Props } from "./types";
 
@@ -14,17 +15,21 @@ function AppListItem({
   }, [data.id, onWatchClick]);
 
   return (
-    <tr>
-      <td>{data.id}</td>
-      <td>{data.name}</td>
-      <td>{data.company}</td>
-      <td>
+    <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableCell>{data.id}</TableCell>
+      <TableCell>{data.name}</TableCell>
+      <TableCell>{data.company}</TableCell>
+      <TableCell>
         {onWatchClick ? (
-          <button onClick={_onWatchClick}>{watchButtonLabel}</button>
+          <Button variant="outlined" onClick={_onWatchClick} sx={{ mr: 2 }}>
+            {watchButtonLabel}
+          </Button>
         ) : null}
-        <button onClick={onDetailsClick}>DETAILS</button>
-      </td>
-    </tr>
+        <Button variant="outlined" onClick={onDetailsClick}>
+          DETAILS
+        </Button>
+      </TableCell>
+    </TableRow>
   );
 }
 

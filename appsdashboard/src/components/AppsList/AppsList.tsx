@@ -1,3 +1,13 @@
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import React, { useMemo } from "react";
 import { useAppsContext } from "../../context/AppsContext/AppsContext";
 import AppItemWithDetails from "../AppItemWithDetails/AppItemWithDetails";
@@ -21,21 +31,25 @@ function AppsList() {
   );
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>ALL APPS</th>
-        </tr>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Company</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <Typography fontSize={24} fontWeight={500}>
+              ALL APPS
+            </Typography>
+          </TableRow>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Company</TableCell>
+            <TableCell>Actions</TableCell>
+          </TableRow>
+        </TableHead>
 
-      <tbody>{items}</tbody>
-    </table>
+        <TableBody>{items}</TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 
